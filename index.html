@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something Big is Coming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #87CEEB;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .mystery-img {
+            width: 80%;
+            max-width: 600px;
+            border-radius: 15px;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: blur(10px) brightness(0.7);
+            transform: perspective(800px) rotateY(5deg) rotateX(5deg);
+        }
+        .mystery-img:hover {
+            filter: blur(3px) brightness(1);
+            transform: perspective(800px) rotateY(0deg) rotateX(0deg);
+        }
+        .countdown {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        .subscribe {
+            background-color: #005fcb;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease-in-out;
+        }
+        .subscribe:hover {
+            transform: scale(1.1);
+        }
+        .puzzle {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            width: 60%;
+            max-width: 400px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="children-laughing.mp3" type="audio/mp3">
+    </audio>
+    <div class="container">
+        <h1>Something Big is Coming...</h1>
+        <p>For the first time in Costa Rica. Can you figure it out?</p>
+        <img src="distorted-sabana.jpg" alt="Mysterious Image" class="mystery-img">
+        <p class="countdown">Countdown: <span id="countdown"></span></p>
+        <a href="#" class="subscribe">I Want to Know More!</a>
+        <div class="puzzle">
+            <p><strong>Riddle:</strong> I hold events, yet I am not a calendar. I have seats, yet I am not a bus. What am I?</p>
+            <input type="text" id="answer" placeholder="Your answer here...">
+            <button onclick="checkAnswer()">Submit</button>
+            <p id="result"></p>
+        </div>
+    </div>
+    <script>
+        function countdownTimer() {
+            const eventDate = new Date("April 30, 2025 00:00:00").getTime();
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("countdown").innerText = `${days} days`;
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.getElementById("countdown").innerText = "It's time!";
+                }
+            }, 1000);
+        }
+        countdownTimer();
+
+        function checkAnswer() {
+            const answer = document.getElementById("answer").value.toLowerCase();
+            const result = document.getElementById("result");
+            if (answer === "stadium") {
+                result.innerText = "Correct! Get ready for the big reveal!";
+                result.style.color = "green";
+            } else {
+                result.innerText = "Try again!";
+                result.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
